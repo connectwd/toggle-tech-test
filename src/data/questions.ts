@@ -4,7 +4,7 @@ export const questions = [
       question: "What are the ideal conditions inside an office?",
       options: [
         ["good pay", "bad pay"],
-        ["lot of meetings, many meetings", "less meetings"],
+        ["lot of meetings, many meetings", "less meetings", "only meetings"],
         ["free coffee", "expensive coffee"],
         ["bear in office", "dog in office"],
       ],

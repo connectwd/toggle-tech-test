@@ -1,33 +1,29 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import Toggle from "./Toggle";
 import { QuestionProps } from "@/types/types";
 
-const Question: React.FC<QuestionProps> = ({ question, options, correctAnswers = [] }) => {
+const Question: React.FC<QuestionProps> = ({ question, options = [], correctAnswers = [] }) => {
   const [selectedAnswers, setSelectedAnswers] = useState<string[]>([]);
-  const [locked, setLocked] = useState<boolean>(false);
 
-  // Set the initial selected answers to the first option of each question
+  // Set the initial selectedAnswers to the first option of each question
   useEffect(() => {
     const selectedOnLoad: string[] = options.map(option => option[0]);
     setSelectedAnswers(selectedOnLoad);
-  }, []);
+  }, [options]);
 
   const handleToggleChange = (index: number, value: string) => {
-    if (locked) return;
-    const updatedAnswers = [...selectedAnswers];
-    updatedAnswers[index] = value;
-    setSelectedAnswers(updatedAnswers);
+    setSelectedAnswers(prevAnswers => {
+      const updatedAnswers = [...prevAnswers];
+      updatedAnswers[index] = value;
+      return updatedAnswers;
+    });
   };
 
-  const checkCorrectness = () => {
-    // Check if each selected answer is in the correct answers array
-    console.log(selectedAnswers, correctAnswers);
+  const checkCorrectness = useMemo(() => {
     return selectedAnswers.every((answer, index) => correctAnswers.includes(answer));
-  };
-
-  const isCorrect = checkCorrectness();
+  }, [selectedAnswers, correctAnswers]);
 
   return (
     <div className="max-w-5xl text-white mx-auto space-y-4 text-center">
@@ -39,6 +35,7 @@ const Question: React.FC<QuestionProps> = ({ question, options, correctAnswers =
             options={optionPair}
             selected={selectedAnswers[index]}
             onChange={(value) => handleToggleChange(index, value)}
+            answers={correctAnswers}
           />
         </div>
       ))}
@@ -46,7 +43,7 @@ const Question: React.FC<QuestionProps> = ({ question, options, correctAnswers =
       <div
         className={`mt-4 p-2 rounded-md transition-colors duration-300`}
       >
-        {isCorrect ? "Correct!" : "Incorrect. Try again."}
+        {checkCorrectness ? "Correct!" : "Incorrect. Try again."}
       </div>
     </div>
   );

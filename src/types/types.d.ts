@@ -12,4 +12,5 @@ export interface ToggleProps {
     options: OptionPair;
     selected: string;
     onChange: (value: string) => void;
+    answers: string[];
   }
