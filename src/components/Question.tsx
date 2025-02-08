@@ -30,8 +30,8 @@ const Question: React.FC<QuestionProps> = ({ question, options, correctAnswers =
   const isCorrect = checkCorrectness();
 
   return (
-    <div className="p-4 bg-white rounded-lg shadow-md max-w-3xl mx-auto space-y-4">
-      <h2 className="text-xl font-semibold">{question}</h2>
+    <div className="max-w-5xl text-white mx-auto space-y-4 text-center">
+      <h2 className="text-xl font-semibold mx-5">{question}</h2>
 
       {options.map((optionPair, index) => (
         <div key={index} className="flex items-center justify-between">
@@ -44,22 +44,10 @@ const Question: React.FC<QuestionProps> = ({ question, options, correctAnswers =
       ))}
 
       <div
-        className={`mt-4 p-2 rounded-md transition-colors duration-300 ${
-          isCorrect ? "bg-green-300" : "bg-red-300"
-        }`}
+        className={`mt-4 p-2 rounded-md transition-colors duration-300`}
       >
         {isCorrect ? "Correct!" : "Incorrect. Try again."}
       </div>
-
-      {/* Lock toggles once all are correct */}
-      {isCorrect && !locked && (
-        <button
-          onClick={() => setLocked(true)}
-          className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-full"
-        >
-          Lock Answers
-        </button>
-      )}
     </div>
   );
 };
