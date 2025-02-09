@@ -42,7 +42,7 @@ const Question: React.FC<QuestionProps> = ({ question, options = [], correctAnsw
     correctnessPercentage >= 50 ? "50" : "0";
 
   return (
-    <div className={`min-h-full text-white mx-auto p-8 md:py-24 space-y-4 text-center questionBody_${backgroundColor}`}>
+    <div className={`min-h-screen text-white mx-auto p-8 md:py-24 space-y-4 text-center questionBody_${backgroundColor}`}>
       <h2 className="text-3xl font-semibold mx-6 py-4">{question}</h2>
 
       {options.map((optionPair, index) => (

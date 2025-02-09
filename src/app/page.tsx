@@ -7,7 +7,7 @@ const Page = () => {
   const QuestionWithShuffledOptions = shuffleArray(questions);
 
   return (
-    <main className="min-h-screen min-w-full">
+    <main className="min-h-full min-w-full">
       {QuestionWithShuffledOptions.map((q, index) => (
         <Question
           key={index}
