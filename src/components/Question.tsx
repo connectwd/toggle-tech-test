@@ -1,12 +1,12 @@
 "use client";
-
 import React, { useState, useEffect, useMemo } from "react";
 import Toggle from "./Toggle";
 import { QuestionProps } from "@/types/types";
 
+
 const Question: React.FC<QuestionProps> = ({ question, options = [], correctAnswers = [] }) => {
   const [selectedAnswers, setSelectedAnswers] = useState<string[]>([]);
-
+  const [correctnessPercentage, setCorrectnessPercentage] = useState(0);
   // Set the initial selectedAnswers to the first option of each question
   useEffect(() => {
     const selectedOnLoad: string[] = options.map(option => option[0]);
@@ -21,12 +21,33 @@ const Question: React.FC<QuestionProps> = ({ question, options = [], correctAnsw
     });
   };
 
-  const checkCorrectness = useMemo(() => {
-    return selectedAnswers.every((answer, index) => correctAnswers.includes(answer));
-  }, [selectedAnswers, correctAnswers]);
+  const checkCorrectness = () => {
+    // Calculate how many answers are correct
+    const correctCount = selectedAnswers.filter((answer) => correctAnswers.includes(answer)).length;
+    const percentage = Math.round((correctCount / correctAnswers.length) * 100);
+    setCorrectnessPercentage(percentage);
+
+    return percentage === 100;
+  };
+
+  useEffect(() => {
+    checkCorrectness();
+  }, [selectedAnswers]);
+
+  useEffect(() => {
+    if (correctnessPercentage === 100) {
+      // Force a re-render when correctnessPercentage hits 100
+      setCorrectnessPercentage(prev => prev);
+    }
+  }, [correctnessPercentage]);
+
+  const backgroundColor = correctnessPercentage === 100 ? "100" : 
+    correctnessPercentage >= 50 ? "50" : "0";
+
+  console.log(correctnessPercentage, backgroundColor);
 
   return (
-    <div className="max-w-5xl text-white mx-auto space-y-4 text-center">
+    <div className={`size-full text-white mx-auto space-y-4 text-center questionBody_${backgroundColor}`}>
       <h2 className="text-xl font-semibold mx-5">{question}</h2>
 
       {options.map((optionPair, index) => (
@@ -36,6 +57,7 @@ const Question: React.FC<QuestionProps> = ({ question, options = [], correctAnsw
             selected={selectedAnswers[index]}
             onChange={(value) => handleToggleChange(index, value)}
             answers={correctAnswers}
+            styles={backgroundColor}
           />
         </div>
       ))}
@@ -43,7 +65,7 @@ const Question: React.FC<QuestionProps> = ({ question, options = [], correctAnsw
       <div
         className={`mt-4 p-2 rounded-md transition-colors duration-300`}
       >
-        {checkCorrectness ? "Correct!" : "Incorrect. Try again."}
+        {correctnessPercentage === 100 ? "Correct!" : "Incorrect. Try again."}
       </div>
     </div>
   );
