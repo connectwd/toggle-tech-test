@@ -7,7 +7,7 @@ const Page = () => {
   const shuffledQuestions = shuffleArray(questions);
 
   return (
-    <main className="min-h-screen min-w-full p-8 md:py-24">
+    <main className="min-h-screen min-w-full">
       {shuffledQuestions.map((q, index) => (
         <Question
           key={index}

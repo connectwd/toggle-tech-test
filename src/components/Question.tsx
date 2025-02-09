@@ -47,8 +47,8 @@ const Question: React.FC<QuestionProps> = ({ question, options = [], correctAnsw
   console.log(correctnessPercentage, backgroundColor);
 
   return (
-    <div className={`size-full text-white mx-auto space-y-4 text-center questionBody_${backgroundColor}`}>
-      <h2 className="text-xl font-semibold mx-5">{question}</h2>
+    <div className={`min-h-screen text-white mx-auto p-8 md:py-24 space-y-4 text-center questionBody_${backgroundColor}`}>
+      <h2 className="text-3xl font-semibold mx-6 py-4">{question}</h2>
 
       {options.map((optionPair, index) => (
         <div key={index} className="flex items-center justify-between">
@@ -63,7 +63,7 @@ const Question: React.FC<QuestionProps> = ({ question, options = [], correctAnsw
       ))}
 
       <div
-        className={`mt-4 p-2 rounded-md transition-colors duration-300`}
+        className={`mt-4 p-4 text-2xl rounded-md transition-colors duration-300`}
       >
         {correctnessPercentage === 100 ? "Correct!" : "Incorrect. Try again."}
       </div>
