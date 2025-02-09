@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import Toggle from "./Toggle";
 import { QuestionProps } from "@/types/types";
 
@@ -12,6 +12,7 @@ const Question: React.FC<QuestionProps> = ({ question, options = [], correctAnsw
     const selectedOnLoad: string[] = options.map(option => option[0]);
     setSelectedAnswers(selectedOnLoad);
   }, [options]);
+
 
   const handleToggleChange = (index: number, value: string) => {
     setSelectedAnswers(prevAnswers => {
@@ -44,10 +45,8 @@ const Question: React.FC<QuestionProps> = ({ question, options = [], correctAnsw
   const backgroundColor = correctnessPercentage === 100 ? "100" : 
     correctnessPercentage >= 50 ? "50" : "0";
 
-  console.log(correctnessPercentage, backgroundColor);
-
   return (
-    <div className={`min-h-screen text-white mx-auto p-8 md:py-24 space-y-4 text-center questionBody_${backgroundColor}`}>
+    <div className={`min-h-full text-white mx-auto p-8 md:py-24 space-y-4 text-center questionBody_${backgroundColor}`}>
       <h2 className="text-3xl font-semibold mx-6 py-4">{question}</h2>
 
       {options.map((optionPair, index) => (
