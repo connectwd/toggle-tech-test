@@ -29,7 +29,7 @@ const Question: React.FC<QuestionProps> = ({ question, options = [], correctAnsw
 
   useEffect(() => {
     setCorrectnessPercentage(checkCorrectness());
-  }, [selectedAnswers]);
+  }, [selectedAnswers, checkCorrectness]);
 
   useEffect(() => {
     if (correctnessPercentage === 100) {

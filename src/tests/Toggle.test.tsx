@@ -1,4 +1,4 @@
-import { render, fireEvent } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import Toggle from '@/components/Toggle';
 import '@testing-library/jest-dom';
 
