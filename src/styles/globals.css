@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background-0: linear-gradient(180deg, #F6B868 0%, #EE6B2D 100%);
+  --background-50: linear-gradient(180deg, #F1B496 0%, #EA806A 100%);
+  --background-100: linear-gradient(180deg, #76E0C2 0%, #59CADA 100%);
+  --grey-blue: #A5E7E2;
+  --grey-red: #F8CAA3;
+  --grey-orange: #F2CBBD;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.questionBody_0 {
+  background: var(--background-0);
+}
+.questionBody_50 {
+  background: var(--background-50);
+}
+.questionBody_100 {
+  background: var(--background-100);
+}
+.optionBody_0 {
+  background: var(--grey-red);
+}
+.optionBody_50 {
+  background: var(--grey-orange);
+  color: #E47958;
+}    
+.optionBody_100 {
+  background: var(--grey-blue);
+  color: #4CAD94;
+}
+.optionOutline_0 {
+  border: 2px solid var(--grey-red);
+}
+.optionOutline_50 {
+  border: 2px solid var(--grey-orange);
+}
+.optionOutline_100 {
+  border: 2px solid var(--grey-blue);
+}
