@@ -3,16 +3,15 @@ import React, { useState, useEffect } from "react";
 import Toggle from "./Toggle";
 import { QuestionProps } from "@/types/types";
 
-
 const Question: React.FC<QuestionProps> = ({ question, options = [], correctAnswers = [] }) => {
   const [selectedAnswers, setSelectedAnswers] = useState<string[]>([]);
   const [correctnessPercentage, setCorrectnessPercentage] = useState(0);
+
   // Set the initial selectedAnswers to the first option of each question
   useEffect(() => {
     const selectedOnLoad: string[] = options.map(option => option[0]);
     setSelectedAnswers(selectedOnLoad);
   }, [options]);
-
 
   const handleToggleChange = (index: number, value: string) => {
     setSelectedAnswers(prevAnswers => {
@@ -22,17 +21,14 @@ const Question: React.FC<QuestionProps> = ({ question, options = [], correctAnsw
     });
   };
 
+  // Calc current correctness as a percentage
   const checkCorrectness = () => {
-    // Calculate how many answers are correct
-    const correctCount = selectedAnswers.filter((answer) => correctAnswers.includes(answer)).length;
-    const percentage = Math.round((correctCount / correctAnswers.length) * 100);
-    setCorrectnessPercentage(percentage);
-
-    return percentage === 100;
+    const correctCount = selectedAnswers.filter(answer => correctAnswers.includes(answer)).length;
+    return Math.round((correctCount / correctAnswers.length) * 100);
   };
 
   useEffect(() => {
-    checkCorrectness();
+    setCorrectnessPercentage(checkCorrectness());
   }, [selectedAnswers]);
 
   useEffect(() => {

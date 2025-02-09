@@ -9,11 +9,11 @@ const Toggle: React.FC<ToggleProps> = ({ options = [], selected, onChange, answe
             {options.map((option, index) => (
                 <button
                     disabled={answers.includes(selected)}
-                    key={option}
+                    key={index}
                     className={`relative flex items-center justify-center align-middle flex-1 text-lg xl:text-2xl font-medium p-3 transition-discreet duration-500
-            ${selected === option ? `text-[#9F938B]  optionBody_${styles}` : "text-white"}
-            ${options.length > 2 ? "flex-col w-full md:rounded-full" : "w-1/2 rounded-full"}
-          `}
+                    ${selected === option ? `text-[#9F938B]  optionBody_${styles}` : "text-white"}
+                    ${options.length > 2 ? "flex-col w-full md:rounded-full" : "w-1/2 rounded-full"}
+                    `}
                     onClick={() => onChange(option)}
                 >
                     {option}

@@ -2,7 +2,8 @@
 Tech test repo
 
 # Assuptions
-1. Made guess as to have multiple questions should be displayed
+1. Made guess as to how multiple questions should be displayed
+2. Assumed the answer selected on initial load should not be randomised
 
 # Limitations
 1. In wanting to restrict the project to tools I know, I wasnt fully able to replicate the desired transition affects using tailwind alone.

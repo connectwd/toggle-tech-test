@@ -3,12 +3,12 @@ import Question from "@/components/Question";
 import { shuffleArray } from "@/utils/shuffle";
 import { questions } from "@/data/questions";
 const Page = () => {
-  // Shuffle the options for randomness
-  const shuffledQuestions = shuffleArray(questions);
+  // Shuffle the options for the question
+  const QuestionWithShuffledOptions = shuffleArray(questions);
 
   return (
     <main className="min-h-screen min-w-full">
-      {shuffledQuestions.map((q, index) => (
+      {QuestionWithShuffledOptions.map((q, index) => (
         <Question
           key={index}
           question={q.question}
