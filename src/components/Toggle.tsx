@@ -2,7 +2,6 @@
 import { ToggleProps } from "@/types/types";
 import React from "react";
 
-
 const Toggle: React.FC<ToggleProps> = ({ options = [], selected, onChange, answers = [], styles }) => {
     return (
         <div className={`relative flex border-2 transition-all duration-300 hover:shadow-md overflow-hidden w-full text-nowrap flex-wrap md:flex-nowrap optionOutline_${styles} ${options.length > 2 ? "flex-col md:flex-row rounded-3xl md:rounded-full" : "flex-row rounded-full"}`}>

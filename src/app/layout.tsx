@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Mulish } from "next/font/google";
 import "../styles/globals.css";
+import React from "react";
 
 const mulish = Mulish({
   variable: "--font-mulish",
@@ -22,7 +23,9 @@ export default function RootLayout({
       <body
         className={`${mulish.variable} antialiased`}
       >
+        <React.StrictMode>
         {children}
+        </React.StrictMode>
       </body>
     </html>
   );

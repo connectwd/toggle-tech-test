@@ -2,9 +2,9 @@ import React from "react";
 import Question from "@/components/Question";
 import { shuffleArray } from "@/utils/shuffle";
 import { questions } from "@/data/questions";
+
+const QuestionWithShuffledOptions = shuffleArray(questions);
 const Page = () => {
-  // Shuffle the options for the question
-  const QuestionWithShuffledOptions = shuffleArray(questions);
 
   return (
     <main className="min-h-full min-w-full">

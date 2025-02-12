@@ -1,17 +1,10 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Toggle from "./Toggle";
 import { QuestionProps } from "@/types/types";
 
 const Question: React.FC<QuestionProps> = ({ question, options = [], correctAnswers = [] }) => {
-  const [selectedAnswers, setSelectedAnswers] = useState<string[]>([]);
-  const [correctnessPercentage, setCorrectnessPercentage] = useState(0);
-
-  // Set the initial selectedAnswers to the first option of each question
-  useEffect(() => {
-    const selectedOnLoad: string[] = options.map(option => option[0]);
-    setSelectedAnswers(selectedOnLoad);
-  }, [options]);
+  const [selectedAnswers, setSelectedAnswers] = useState<string[]>(() => options.map(option => option[0]));
 
   const handleToggleChange = (index: number, value: string) => {
     setSelectedAnswers(prevAnswers => {
@@ -21,22 +14,9 @@ const Question: React.FC<QuestionProps> = ({ question, options = [], correctAnsw
     });
   };
 
-  // Calc current correctness as a percentage
-  const checkCorrectness = () => {
-    const correctCount = selectedAnswers.filter(answer => correctAnswers.includes(answer)).length;
-    return Math.round((correctCount / correctAnswers.length) * 100);
-  };
-
-  useEffect(() => {
-    setCorrectnessPercentage(checkCorrectness());
-  }, [selectedAnswers, checkCorrectness]);
-
-  useEffect(() => {
-    if (correctnessPercentage === 100) {
-      // Force a re-render when correctnessPercentage hits 100
-      setCorrectnessPercentage(prev => prev);
-    }
-  }, [correctnessPercentage]);
+  const correctnessPercentage = Math.round(
+    (selectedAnswers.filter(answer => correctAnswers.includes(answer)).length / correctAnswers.length) * 100
+  );
 
   const backgroundColor = correctnessPercentage === 100 ? "100" : 
     correctnessPercentage >= 50 ? "50" : "0";
@@ -57,9 +37,7 @@ const Question: React.FC<QuestionProps> = ({ question, options = [], correctAnsw
         </div>
       ))}
 
-      <div
-        className={`mt-4 p-4 text-2xl rounded-md transition-colors duration-300`}
-      >
+      <div className={`mt-4 p-4 text-2xl rounded-md transition-colors duration-300`}>
         {correctnessPercentage === 100 ? "Correct!" : "Incorrect. Try again."}
       </div>
     </div>
